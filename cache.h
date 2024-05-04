@@ -6,9 +6,41 @@
 #define CACHE_SIZE 10
 
 class Cache {
+  
 private:
-  // TODO: private inner struct/class 선언 가능
-  // TODO: private 멤버 변수와 함수 추가 가능
+struct Node {
+  std::string key;
+  double value; 
+  Node* next;
+  Node* prev;
+};
+  Node* head; 
+  Node* tail;
+  int capacity;
+  void remove(Node* node);
+  void insertFront(Node* node);
+  bool isFull();
+  int cacheSize();
+struct Bucket {
+        std::string key;
+        int value;
+        Bucket* next;
+    };
+
+  static const int tableSize = 1000; // 해시 테이블의 크기
+  Bucket* hashTable[tableSize]; // 해시 테이블 배열
+
+  // 해시 함수
+  unsigned int hashFunction(const std::string& key);
+
+  // 버킷 생성 및 초기화
+  Bucket* createBucket(const std::string& key, int value);
+
+  // 해시 테이블에서 키에 해당하는 버킷을 찾는다
+  Bucket* findBucket(const std::string& key);
+
+  // 해시 테이블에 버킷을 추가한다
+  void addToHashTable(const std::string& key, int value);
 
 public:
   Cache();
