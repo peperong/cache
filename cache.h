@@ -9,10 +9,10 @@ class Cache {
   
 private:
 struct Node {
-  std::string key;
-  double value; 
-  Node* next;
-  Node* prev;
+    std::string key;
+    double value;
+    Node* next;
+    Node* prev;
 };
   Node* head; 
   Node* tail;

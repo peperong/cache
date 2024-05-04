@@ -1,6 +1,7 @@
 #include "cache.h"
 #include <sstream>
 
+// TODO: 필요한 함수 구현
 Cache::Cache() : head(nullptr), tail(nullptr), capacity(CACHE_SIZE) {}
 
 Cache::~Cache() {
@@ -16,7 +17,7 @@ unsigned int Cache::hashFunction(const std::string& key) {
     for (char c : key) {
         hash = ((hash << 5) + hash) + c; // hash * 33 + c
     }
-    return hash % tableSize;
+    return hash % capacity;
 }
 
 void Cache::remove(Node* node) {
@@ -79,7 +80,6 @@ bool Cache::get(std::string key, int& value) {
     while (current) {
         if (current->key == key) {
             value = current->value;
-            // Move the accessed node to the front
             if (current != head) {
                 remove(current);
                 insertFront(current);
@@ -96,7 +96,6 @@ bool Cache::get(std::string key, double& value) {
     while (current) {
         if (current->key == key) {
             value = current->value;
-            // Move the accessed node to the front
             if (current != head) {
                 remove(current);
                 insertFront(current);
